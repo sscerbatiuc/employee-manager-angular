@@ -1,5 +1,55 @@
-<ul>
-  <li *ngFor="let employee of employees">
-    {{ employee.name }}
-  </li>
-</ul>
+<div class="list row">
+  <div class="col-md-8">
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by name"
+        [(ngModel)]="query"
+      />
+      <div class="input-group-append">
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          (click)="searchByName()"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h4>Employee List</h4>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let employee of employees; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="selectEmployee(employee, i)"
+      >
+        {{ employee.name }}
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-6">
+    <div *ngIf="currentEmployee">
+      <h4>Employee</h4>
+      <div>
+        <label><strong>id:</strong></label> {{ currentEmployee.id }}
+      </div>
+      <div>
+        <label><strong>Name:</strong></label>
+        {{ currentEmployee.name }}
+      </div>
+
+      <a class="btn btn-warning" href="/employees/{{ currentEmployee.id }}">
+        Edit
+      </a>
+    </div>
+
+    <div *ngIf="!currentEmployee">
+      <br />
+      <p>Please click on an Employee...</p>
+    </div>
+  </div>
+</div>

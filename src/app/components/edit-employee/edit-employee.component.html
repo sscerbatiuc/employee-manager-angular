@@ -1,12 +1,13 @@
-<div class="submit-form">
-  <div *ngIf="!submitted">
+<div *ngIf="currentEmployee" class="edit-form">
+  <h4>Employee</h4>
+  <form>
     <div class="form-group">
       <label for="title">Id</label>
       <input
         type="text"
         class="form-control"
         id="title"
-        [(ngModel)]="createdEmployee.id"
+        [(ngModel)]="currentEmployee.id"
         name="title"
       />
     </div>
@@ -16,7 +17,7 @@
         type="text"
         class="form-control"
         id="name"
-        [(ngModel)]="createdEmployee.name"
+        [(ngModel)]="currentEmployee.name"
         name="name"
       />
     </div>
@@ -26,16 +27,25 @@
         type="text"
         class="form-control"
         id="birthdate"
-        [(ngModel)]="createdEmployee.birthdate"
+        [(ngModel)]="currentEmployee.birthdate"
         name="birthdate"
       />
     </div>
 
-    <button (click)="saveEmployee()" class="btn btn-success">Add</button>
-  </div>
 
-  <div *ngIf="submitted">
-    <ngb-alert type="success">Employee created successfully!</ngb-alert>
-    <button class="btn btn-success" (click)="resetEmployee()">Add</button>
-  </div>
+  </form>
+
+  <button class="btn btn-danger mr-2" (click)="deleteEmployee()">
+    Delete
+  </button>
+
+  <button type="submit" class="btn btn-success" (click)="updateEmployee()">
+    Update
+  </button>
+  <p>{{ message }}</p>
+</div>
+
+<div *ngIf="!currentEmployee">
+  <br />
+  <p>Cannot access this Employee...</p>
 </div>
